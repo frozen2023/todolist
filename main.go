@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"todolist/config"
 	_ "todolist/docs"
 	"todolist/route"
 )
@@ -23,10 +24,12 @@ func Helloworld(g *gin.Context) {
 	g.JSON(http.StatusOK, "helloworld")
 }
 
-const server_port = ":9000"
+const PORT = ":9000"
 
 func main() {
+	// 初始化mysql连接
+	config.InitMysql()
 	// 通过路由获取engine
 	r := route.GetRouter()
-	r.Run(server_port)
+	r.Run(PORT)
 }

@@ -12,7 +12,11 @@ import (
  */
 func GetRouter() *gin.Engine {
 	r := gin.Default()
+	// swagger
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
-	r.GET("/user", controller.Register)
+	// 注册
+	r.POST("/user", controller.Register)
+	// 登录
+	r.POST("/user/login", controller.Login)
 	return r
 }
